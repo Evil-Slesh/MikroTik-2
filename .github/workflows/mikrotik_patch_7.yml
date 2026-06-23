@@ -743,10 +743,10 @@ jobs:
         EOF
 
         sshpass -p "$PASS" ssh -o StrictHostKeyChecking=no -p $PORT $USER@$SERVER \
-          "echo $LATEST_VERSION $BUILD_TIME | tee /rw/disk/$REMOTE_PATH/NEWESTa7.$CHANNEL; bash /rw/disk/$REMOTE_PATH/packages.sh /rw/disk/$REMOTE_PATH/$LATEST_VERSION"
+          "echo $LATEST_VERSION $BUILD_TIME | tee $REMOTE_PATH/NEWESTa7.$CHANNEL; bash $REMOTE_PATH/packages.sh $REMOTE_PATH/$LATEST_VERSION"
 
         sshpass -p "$PASS" ssh -o StrictHostKeyChecking=no -p $PORT $USER@$SERVER \
-          "chown -R 32768:32768 /rw/disk/$REMOTE_PATH/" 
+          "chown -R 32768:32768 $REMOTE_PATH/" 
           
     # - name: Upload to R2 Bucket
     #   if: steps.get_latest.outputs.has_new_version == 'true' && env.RELEASE == 'true'
